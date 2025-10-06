@@ -1,12 +1,12 @@
 #include "debug.h"
 
 int printCommonInstruction(int instructionIndex, const char *instruction){
-  printf("%04d -> |%s|\n", instructionIndex, instruction);
+  printf("<%s>\n", instruction);
   return instructionIndex + 1;
 }
 
 int printCommonConstant(int instructionIndex, const char *instruction, Value value){
-  printf("%04d -> |%s| '%g'\n", instructionIndex, instruction, value);
+  printf("<%s> '%g'\n", instruction, value);
   return instructionIndex + 2;
 }
 
@@ -16,11 +16,32 @@ int printLongConstant(int instructionIndex, const char *instruction, Chunk *chun
               chunk->instructions[instructionIndex + 3] << 16;
 
   Value value = chunk->values.values[index];
-  printf("%04d -> |%s| '%g'\n", instructionIndex, instruction, value);
+  printf("<%s> '%g'\n", instruction, value);
   return instructionIndex + 4;
 }
 
-int printInstructions(Chunk *chunk, int instructionIndex){
+int getLine(Chunk *chunk, int instructionIndex) {
+  int offset = 0;
+  for (int i = 0; i < chunk->lineCount; i += 2) {
+    int line = chunk->lines[i];
+    int count = chunk->lines[i + 1];
+    if (instructionIndex < offset + count) {
+      return line;
+    }
+    offset += count;
+  }
+  return -1;
+}
+
+int deconstructInstruction(Chunk *chunk, int instructionIndex){
+  printf("%04d ", instructionIndex);
+  //show the line where a error happened
+  int line = getLine(chunk, instructionIndex);
+  if(instructionIndex > 0 && line == getLine(chunk, instructionIndex - 1)){
+    printf("  | ");
+  }else{
+    printf("%4d ", line);
+  }
   switch(chunk->instructions[instructionIndex]){
     case RETURN:
       return printCommonInstruction(instructionIndex, "RETURN");
@@ -36,6 +57,6 @@ int printInstructions(Chunk *chunk, int instructionIndex){
 
 void deconstructChunk(Chunk *chunk){
   for(int index = 0; index < chunk->count;){
-    index = printInstructions(chunk, index);
+    index = deconstructInstruction(chunk, index);
   }
 }

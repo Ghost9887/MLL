@@ -8,8 +8,8 @@ int main(int agrc, char *argv[]){
   Chunk chunk;
   initChunk(&chunk);
 
-  addInstruction(&chunk, RETURN);
-  addValue(&chunk, 20.0);
+  addInstruction(&chunk, RETURN, 10);
+  addValue(&chunk, 20.0, 20);
 
   deconstructChunk(&chunk);
   freeChunk(&chunk);
