@@ -7,7 +7,8 @@
 
 typedef enum Instructions{
   RETURN,
-  CONSTANT
+  CONSTANT,
+  CONSTANT_LONG
 }Instructions;
 
 typedef struct Chunk{

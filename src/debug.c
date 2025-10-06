@@ -10,6 +10,16 @@ int printCommonConstant(int instructionIndex, const char *instruction, Value val
   return instructionIndex + 2;
 }
 
+int printLongConstant(int instructionIndex, const char *instruction, Chunk *chunk){
+  int index = chunk->instructions[instructionIndex + 1] |
+              chunk->instructions[instructionIndex + 2] << 8|
+              chunk->instructions[instructionIndex + 3] << 16;
+
+  Value value = chunk->values.values[index];
+  printf("%04d -> |%s| '%g'\n", instructionIndex, instruction, value);
+  return instructionIndex + 4;
+}
+
 int printInstructions(Chunk *chunk, int instructionIndex){
   switch(chunk->instructions[instructionIndex]){
     case RETURN:
@@ -17,6 +27,8 @@ int printInstructions(Chunk *chunk, int instructionIndex){
     case CONSTANT:
       Value value = (Value)chunk->values.values[chunk->instructions[instructionIndex + 1]];
       return printCommonConstant(instructionIndex, "CONSTANT", value);
+    case CONSTANT_LONG:
+      return printLongConstant(instructionIndex, "CONSTANT_LONG", chunk);
     default:
       return instructionIndex + 1;
   }

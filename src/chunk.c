@@ -20,8 +20,15 @@ void addInstruction(Chunk *chunk, uint8_t instruction){
 
 void addValue(Chunk *chunk, Value value){
   int index = addValueToValueArr(&chunk->values, value);
-  addInstruction(chunk, CONSTANT);
-  addInstruction(chunk, index);
+  if(index < 256){
+    addInstruction(chunk, CONSTANT);
+    addInstruction(chunk, (uint8_t)index);
+  }else{
+    addInstruction(chunk, CONSTANT_LONG);
+    addInstruction(chunk, (uint8_t)index & 0xFF);
+    addInstruction(chunk, ((uint8_t)index >> 8) & 0xFF);
+    addInstruction(chunk, ((uint8_t)index >> 16) & 0xFF);
+  }
 }
 
 void freeChunk(Chunk *chunk){
