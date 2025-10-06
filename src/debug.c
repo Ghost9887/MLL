@@ -6,7 +6,7 @@ int printCommonInstruction(int instructionIndex, const char *instruction){
 }
 
 int printCommonConstant(int instructionIndex, const char *instruction, Value value){
-  printf("%04d -> |%s| -> %g\n", instructionIndex, instruction, value);
+  printf("%04d -> |%s| '%g'\n", instructionIndex, instruction, value);
   return instructionIndex + 2;
 }
 
