@@ -1,21 +1,22 @@
 #include "debug.h"
 
-int printCommonInstruction(Chunk *chunk, int instructionIndex, const char *instruction){
+int printCommonInstruction(int instructionIndex, const char *instruction){
   printf("%04d -> |%s|\n", instructionIndex, instruction);
   return instructionIndex + 1;
 }
 
-int printCommonConstant(Chunk *chunk, int instructionIndex, const char *instruction){
-  printf("%04d -> |%s|\n", instructionIndex, instruction);
-  return instructionIndex + 1;
+int printCommonConstant(int instructionIndex, const char *instruction, Value value){
+  printf("%04d -> |%s| -> %g\n", instructionIndex, instruction, value);
+  return instructionIndex + 2;
 }
 
 int printInstructions(Chunk *chunk, int instructionIndex){
   switch(chunk->instructions[instructionIndex]){
     case RETURN:
-      return printCommonInstruction(chunk, instructionIndex, "RETURN");
+      return printCommonInstruction(instructionIndex, "RETURN");
     case CONSTANT:
-      return printCommonConstant(chunk, instructionIndex, "CONSTANT");
+      Value value = (Value)chunk->values.values[chunk->instructions[instructionIndex + 1]];
+      return printCommonConstant(instructionIndex, "CONSTANT", value);
     default:
       return instructionIndex + 1;
   }

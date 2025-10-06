@@ -1,6 +1,7 @@
 #include "common.h"
 #include "debug.h"
 #include "chunk.h"
+#include "value.h"
 
 
 int main(int agrc, char *argv[]){
@@ -8,9 +9,9 @@ int main(int agrc, char *argv[]){
   initChunk(&chunk);
 
   addInstruction(&chunk, RETURN);
-  addInstruction(&chunk, CONSTANT);
-  deconstructChunk(&chunk);
+  addValue(&chunk, 20.0);
 
+  deconstructChunk(&chunk);
   freeChunk(&chunk);
   return 0;
 }
