@@ -6,7 +6,7 @@
 
 void readFile(const char *fileName);
 void getInput();
-void scan(const char *source);
+void scan(char *source);
 
 int main(int argc, char *argv[]){
 
@@ -42,12 +42,32 @@ int main(int argc, char *argv[]){
   return 0;
 }
 
-void scan(const char *source){
+void scan(char *source){
+  printf("%s\n", source);
 }
 
 void readFile(const char *fileName){
+  FILE *file;
+  file = fopen(fileName, "r");
+  if(file == NULL){
+    printf("File not found\n");
+    exit(1);
+  }
+  fseek(file, 0, SEEK_END);
+  int fileSize = ftell(file);
+  rewind(file);
+  char *buffer = malloc(sizeof(char) * fileSize + 1);
+  fread(buffer, 1, fileSize, file);
+  buffer[fileSize] = '\0';
+  fclose(file);
+  scan(buffer);
 }
 
 void getInput(){
+  char *buffer = malloc(sizeof(char) * 1000);
+  printf("Enter your code\n");
+  printf("> ");
+  scanf("%s", buffer);
+  scan(buffer);
 }
 
