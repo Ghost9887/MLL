@@ -1,0 +1,31 @@
+MLL (Multi Language Language)is going to be a fully functional programming language that supports multiple languages to write the syntax
+the syntax will be easy to write (python style)
+no memory managment(garbage collector)
+no multithreading(for now)
+
+
+var a = 5;
+var b = 5;
+var c = add(a, b);
+
+var t = true;
+var t = pravda;
+vat t = wahr;
+
+print("Hello, World\n");
+vytlac("Ahoj, Svet\n");
+drucken("Hallo Welt\n");
+
+func add(var a, var b){
+    return a + b;
+}
+
+funk spocitaj(var a, var b){
+    vratit a + b;
+}
+
+funk hinzufugen(var a, var b){
+    zuruckkehren a + b;
+}
+
+

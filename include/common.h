@@ -7,4 +7,6 @@
 #include <stdint.h>
 #include <stddef.h>
 
+#define DEBUG_MODE
+
 #endif

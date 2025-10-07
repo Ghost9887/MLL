@@ -5,5 +5,6 @@
 #include "chunk.h"
 
 void deconstructChunk(Chunk *chunk);
+int deconstructInstruction(Chunk *chunk, int instructionIndex);
 
 #endif
