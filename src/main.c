@@ -9,7 +9,6 @@ int main(int agrc, char *argv[]){
   Chunk chunk;
   initChunk(&chunk);
 
-  //addInstruction(&chunk, RETURN, 10);
   addValue(&chunk, 20.0, 20);
   addValue(&chunk, 30.0, 20);
   addInstruction(&chunk, ADD, 10);
