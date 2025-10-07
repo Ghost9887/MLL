@@ -8,7 +8,12 @@
 typedef enum Instructions{
   RETURN,
   CONSTANT,
-  CONSTANT_LONG
+  CONSTANT_LONG,
+  ADD,
+  SUBTRACT,
+  MULTIPLY,
+  DIVIDE,
+  NEGATE
 }Instructions;
 
 typedef struct Chunk{

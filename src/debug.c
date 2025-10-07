@@ -33,15 +33,19 @@ int getLine(Chunk *chunk, int instructionIndex) {
   return -1;
 }
 
+//TODO: lines dont work again :(
 int deconstructInstruction(Chunk *chunk, int instructionIndex){
   printf("%04d ", instructionIndex);
   //show the line where a error happened
   int line = getLine(chunk, instructionIndex);
+  /*
   if(instructionIndex > 0 && line == getLine(chunk, instructionIndex - 1)){
     printf("  | ");
   }else{
     printf("%4d ", line);
   }
+  */
+  printf("%4d ", line);
   switch(chunk->instructions[instructionIndex]){
     case RETURN:
       return printCommonInstruction(instructionIndex, "RETURN");
@@ -50,6 +54,16 @@ int deconstructInstruction(Chunk *chunk, int instructionIndex){
       return printCommonConstant(instructionIndex, "CONSTANT", value);
     case CONSTANT_LONG:
       return printLongConstant(instructionIndex, "CONSTANT_LONG", chunk);
+    case ADD:
+      return printCommonInstruction(instructionIndex, "ADD");
+    case SUBTRACT:
+      return printCommonInstruction(instructionIndex, "SUBTRACT");
+    case MULTIPLY:
+      return printCommonInstruction(instructionIndex, "MULTIPLY");
+    case DIVIDE:
+      return printCommonInstruction(instructionIndex, "DIVIDE");
+    case NEGATE:
+      return printCommonInstruction(instructionIndex, "NEGATE");
     default:
       return instructionIndex + 1;
   }

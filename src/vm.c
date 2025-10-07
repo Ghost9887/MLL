@@ -23,6 +23,14 @@ uint8_t getInstruction(){
 }
 
 void run(){
+  //macro to use math operators
+  #define BINARY_OP(op) \
+  do { \
+    double b = pop(); \
+    double a = pop(); \
+    push(a op b); \
+  }while(false)
+
   while(true){
     uint8_t instruction = getInstruction(); 
     int index = (int)(vm.ip - vm.chunk->instructions - 1);
@@ -37,7 +45,23 @@ void run(){
         //printf("stack push: %g\n", value);
         push(value);
         break;
+      case ADD:
+        BINARY_OP(+);
+        break;
+      case SUBTRACT:
+        BINARY_OP(-);
+        break;
+      case MULTIPLY:
+        BINARY_OP(*);
+        break;
+      case DIVIDE:
+        BINARY_OP(/);
+        break;
+      case NEGATE:
+        push(-pop());
+        break;
       case RETURN:
+        printf("Result: %g\n", pop());
         return;
       default:
         break;
