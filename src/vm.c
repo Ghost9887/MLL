@@ -33,7 +33,6 @@ void run(){
 
   while(true){
     uint8_t instruction = getInstruction(); 
-    printf("Insturction: %d\n", instruction);
     int index = (int)(vm.ip - vm.chunk->instructions - 1);
     //printf("index: %d\n", index);
     //debug mode
