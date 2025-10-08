@@ -43,7 +43,10 @@ int main(int argc, char *argv[]){
 }
 
 void scan(char *source){
-  printf("%s\n", source);
+  InterpretResult result = interpret(source);
+  free(source);
+  if(result == INTERPRET_COMPILE_ERROR) exit(65);
+  if(result == INTERPRET_RUNTIME_ERROR) exit(70);
 }
 
 void readFile(const char *fileName){

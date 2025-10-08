@@ -71,3 +71,8 @@ void run(){
 
 void freeVM(){
 }
+
+InterpretResult interpret(const char *source){
+  compile(source);
+  return INTERPRET_OK;
+}

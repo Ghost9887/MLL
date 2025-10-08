@@ -4,6 +4,7 @@
 #include "common.h"
 #include "chunk.h"
 #include "debug.h"
+#include "compile.h"
 
 #define STACK_MAX 256
 
@@ -22,6 +23,7 @@ typedef enum InterpretResult{
 
 void initVM(Chunk *chunk);
 void run();
+InterpretResult interpret(const char *source);
 void freeVM();
 
 #endif
