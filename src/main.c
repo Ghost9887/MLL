@@ -9,11 +9,10 @@ void getInput();
 void scan(char *source);
 
 int main(int argc, char *argv[]){
-
   if(argc == 2) readFile(argv[1]);
   else if(argc == 1) getInput();
   else fprintf(stderr, "Usage: ./a.out 'file' | ./a.out\n");
-
+  
   /*
   Chunk chunk;
   initChunk(&chunk);
@@ -39,6 +38,7 @@ int main(int argc, char *argv[]){
   run();
   freeChunk(&chunk);
   */
+  
   return 0;
 }
 

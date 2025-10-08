@@ -2,9 +2,7 @@
 
 VM vm;
 
-void initVM(Chunk *chunk){
-  vm.chunk = chunk;
-  vm.ip = chunk->instructions;
+void initVM(){
   vm.stackTop = vm.stack;
 }
 

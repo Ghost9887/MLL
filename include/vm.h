@@ -21,7 +21,7 @@ typedef enum InterpretResult{
   INTERPRET_RUNTIME_ERROR
 }InterpretResult;
 
-void initVM(Chunk *chunk);
+void initVM();
 void run();
 InterpretResult interpret(const char *source);
 void freeVM();
