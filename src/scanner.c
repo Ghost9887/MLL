@@ -3,9 +3,13 @@
 Scanner scanner;
 
 bool isAtEnd();
+bool isNumber(char c);
 Token makeToken(TokenType type);
 Token errorToken(const char *message);
+Token number();
 char advance();
+char peek();
+char peekNext();
 
 void initScanner(const char *source){
   scanner.start = source;
@@ -43,7 +47,12 @@ Token scanToken(){
     case '\n':
       scanner.line++;
       break;
+    case ' ':
+    case '\t':
+    case '\r':
+      break;
     default:
+      if(isNumber(c)) return number();
       return errorToken("Unexpected character.");
   }
 }
@@ -66,8 +75,19 @@ Token errorToken(const char *message){
   return token;
 }
 
+Token number(){
+  while(isNumber(peek())){
+    advance();
+  }
+  return makeToken(TOKEN_NUMBER);
+}
+
 bool isAtEnd(){
   return *scanner.current == '\0';
+}
+
+bool isNumber(char c){
+  return c >= '0' && c <= '9';
 }
 
 char advance(){
@@ -75,4 +95,11 @@ char advance(){
   return scanner.current[-1];
 }
 
+char peek(){
+  return *scanner.current;
+}
+
+char peekNext(){
+  return scanner.current[1];
+}
 
