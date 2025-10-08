@@ -67,7 +67,7 @@ void readFile(const char *fileName){
 }
 
 void getInput(){
-  char *buffer = malloc(sizeof(char) * 1000);
+  char *buffer = malloc(sizeof(char) * 1024);
   printf("Enter your code\n");
   printf("> ");
   scanf("%s", buffer);
