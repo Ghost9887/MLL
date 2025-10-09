@@ -9,11 +9,12 @@ void getInput();
 void scan(char *source);
 
 int main(int argc, char *argv[]){
+  
   if(argc == 2) readFile(argv[1]);
   else if(argc == 1) getInput();
   else fprintf(stderr, "Usage: ./a.out 'file' | ./a.out\n");
   
-  /*
+  /* 
   Chunk chunk;
   initChunk(&chunk);
 
@@ -37,8 +38,8 @@ int main(int argc, char *argv[]){
   initVM(&chunk);
   run();
   freeChunk(&chunk);
-  */
   
+  */ 
   return 0;
 }
 
@@ -70,7 +71,7 @@ void getInput(){
   char *buffer = malloc(sizeof(char) * 1024);
   printf("Enter your code\n");
   printf("> ");
-  scanf("%s", buffer);
+  fgets(buffer, 1024, stdin);
   scan(buffer);
 }
 

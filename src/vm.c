@@ -2,7 +2,9 @@
 
 VM vm;
 
-void initVM(){
+void initVM(Chunk *chunk){
+  vm.chunk = chunk;
+  vm.ip = chunk->instructions;
   vm.stackTop = vm.stack;
 }
 
@@ -32,7 +34,6 @@ void run(){
   while(true){
     uint8_t instruction = getInstruction(); 
     int index = (int)(vm.ip - vm.chunk->instructions - 1);
-    //printf("index: %d\n", index);
     //debug mode
     #ifdef DEBUG_MODE
       deconstructInstruction(vm.chunk, index);
@@ -40,7 +41,6 @@ void run(){
     switch(instruction){
       case CONSTANT:
         Value value = vm.chunk->values.values[*vm.ip++];
-        //printf("stack push: %g\n", value);
         push(value);
         break;
       case ADD:
